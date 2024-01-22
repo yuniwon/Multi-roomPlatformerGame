@@ -1,11 +1,17 @@
-class Player extends sprite{
+class Player extends sprite {
   constructor({
-    collisionBlocks = [], 
+    collisionBlocks = [],
     imageSrc,
     frameRate,
     animations,
+    loop,
   }) {
-    super({imageSrc, frameRate ,  animations});
+    super({
+      imageSrc,
+      frameRate,
+      animations,
+      loop,
+    });
     this.position = {
       x: 200,
       y: 160,
@@ -40,11 +46,12 @@ class Player extends sprite{
     this.checkForVerticalCollisions();
   }
   switchSprite(name) { // 플레이어의 스프라이트를 바꿈
-    if(this.image === this.animations[name].image) return;
+    if (this.image === this.animations[name].image) return;
     this.currentFrame = 0;
     this.image = this.animations[name].image;
     this.frameRate = this.animations[name].frameRate;
     this.frameBuffer = this.animations[name].frameBuffer;
+    this.loop = this.animations[name].loop;
   }
   updateHitbox() { // 충돌 블록과 플레이어의 충돌을 검사하기 위한 hitbox를 업데이트
     this.hitbox = {
@@ -54,6 +61,23 @@ class Player extends sprite{
       },
       width: 50,
       height: 54,
+    }
+  };
+
+  handleInput() { // 키보드 입력을 처리
+    if (this.preventInput) return;
+    this.velocity.x = 0;
+    if (keys.d.pressed) { //오른쪽 키를 누르면 플레이어가 오른쪽으로 이동
+      this.switchSprite('runRight');
+      this.velocity.x = 2;
+      this.lastDirection = 'right';
+    } else if (keys.a.pressed) { //왼쪽 키를 누르면 플레이어가 왼쪽으로 이동
+      this.switchSprite('runLeft');
+      this.velocity.x = -2;
+      this.lastDirection = 'left';
+    } else {
+      if (this.lastDirection === 'left') this.switchSprite('idleLeft');
+      else this.switchSprite('idleRight');
     }
   };
 
@@ -74,7 +98,7 @@ class Player extends sprite{
         if (this.velocity.x > 0) {
           this.velocity.x = 0;
           const offset = this.hitbox.position.x - this.position.x + this.hitbox.width;
-          this.position.x = block.position.x - offset  - 0.01; // 플레이어의 위치를 충돌 블록의 왼쪽으로 옮김
+          this.position.x = block.position.x - offset - 0.01; // 플레이어의 위치를 충돌 블록의 왼쪽으로 옮김
           break;
         }
       }

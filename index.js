@@ -43,11 +43,29 @@ const player = new Player({
       frameBuffer: 8,
       loop: true,
     },
-  
+    enterDoor: {
+      imageSrc: './img/king/enterDoor.png',
+      frameRate: 8,
+      frameBuffer: 8,
+      loop: false,
+    },
+
   }
 });
 
-
+const doors = [
+  new sprite({
+    position: {
+      x: 767,
+      y: 270,
+    },
+    imageSrc: './img/doorOpen.png',
+    frameRate: 5,
+    frameBuffer: 10,
+    loop: false,
+    autoplay: false,
+  }),
+];
 const keys = {
   w: {
     pessed: false,
@@ -68,20 +86,11 @@ function animate() {
   // 충돌 블록 그리기
   collisionBlocks.forEach(block => block.draw());
 
+  // 문 그리기
+  doors.forEach(door => door.draw());
   // c.clearRect(0, 0, canvas.width, canvas.height);
-  player.velocity.x = 0;
-  if (keys.d.pressed) { //오른쪽 키를 누르면 플레이어가 오른쪽으로 이동
-    player.switchSprite('runRight');
-    player.velocity.x = 2;
-    player.lastDirection = 'right';
-  } else if (keys.a.pressed) { //왼쪽 키를 누르면 플레이어가 왼쪽으로 이동
-    player.switchSprite('runLeft');
-    player.velocity.x = -2;
-    player.lastDirection = 'left';
-  }else {
-    if(player.lastDirection === 'left') player.switchSprite('idleLeft');
-    else player.switchSprite('idleRight');
-  }
+
+  player.handleInput(keys);
   player.draw();
   player.update();
 

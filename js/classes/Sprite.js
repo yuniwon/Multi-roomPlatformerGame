@@ -4,6 +4,9 @@ class sprite {
     imageSrc,
     frameRate = 1,
     animations,
+    frameBuffer = 4,
+    loop = true,
+    autoplay = true,
   }) {
     this.position = position;
     this.image = new Image();
@@ -17,11 +20,13 @@ class sprite {
     this.frameRate = frameRate
     this.currentFrame = 0;
     this.elapsedFrames = 0;
-    this.frameBuffer = 4;
+    this.frameBuffer = frameBuffer;
     this.animations = animations;
+    this.loop = loop;
+    this.autoplay = autoplay;
 
     if (this.animations) {
-      for(let key in this.animations){
+      for (let key in this.animations) {
         const image = new Image();
         image.src = this.animations[key].imageSrc;
         this.animations[key].image = image;
@@ -53,11 +58,16 @@ class sprite {
     this.updateFrames();
   }
 
+  play() {
+    this.autoplay = true;
+  }
+
   updateFrames() {
+    if (!this.autoplay) return;
     this.elapsedFrames++;
-    if(this.elapsedFrames % this.frameBuffer === 0){
-      if(this.currentFrame < this.frameRate - 1) this.currentFrame++;
-      else this.currentFrame = 0;
+    if (this.elapsedFrames % this.frameBuffer === 0) {
+      if (this.currentFrame < this.frameRate - 1) this.currentFrame++;
+      else if (this.loop) this.currentFrame = 0;
     }
   }
 };
