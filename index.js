@@ -18,6 +18,33 @@ const player = new Player({
   collisionBlocks,
   imageSrc: './img/king/idle.png',
   frameRate: 11,
+  animations: {
+    idleRight: {
+      imageSrc: './img/king/idle.png',
+      frameRate: 11,
+      frameBuffer: 4,
+      loop: true,
+    },
+    idleLeft: {
+      imageSrc: './img/king/idleLeft.png',
+      frameRate: 11,
+      frameBuffer: 4,
+      loop: true,
+    },
+    runRight: {
+      imageSrc: './img/king/runRight.png',
+      frameRate: 8,
+      frameBuffer: 8,
+      loop: true,
+    },
+    runLeft: {
+      imageSrc: './img/king/runLeft.png',
+      frameRate: 8,
+      frameBuffer: 8,
+      loop: true,
+    },
+  
+  }
 });
 
 
@@ -44,9 +71,16 @@ function animate() {
   // c.clearRect(0, 0, canvas.width, canvas.height);
   player.velocity.x = 0;
   if (keys.d.pressed) { //오른쪽 키를 누르면 플레이어가 오른쪽으로 이동
+    player.switchSprite('runRight');
     player.velocity.x = 2;
+    player.lastDirection = 'right';
   } else if (keys.a.pressed) { //왼쪽 키를 누르면 플레이어가 왼쪽으로 이동
+    player.switchSprite('runLeft');
     player.velocity.x = -2;
+    player.lastDirection = 'left';
+  }else {
+    if(player.lastDirection === 'left') player.switchSprite('idleLeft');
+    else player.switchSprite('idleRight');
   }
   player.draw();
   player.update();
