@@ -47,11 +47,13 @@ const player = new Player({
           opacity: 1,
           onComplete: () => {
             level++;
+            if (level > 3) level = 1;
             levels[level].init();
+            player.switchSprite('idleRight');
+            player.preventInput = false;
             gsap.to(overlay, {
               opacity: 0,
             });
-            player.preventInput = false;
           }
         });
       }
@@ -66,6 +68,8 @@ let levels = {
       parsedCollistions = CollisionsLevel1.parse2D();
       collisionBlocks = parsedCollistions.createObjectsFrom2D();
       player.collisionBlocks = collisionBlocks;
+      if (player.currentAnimation)
+      player.currentAnimation.isActive = false;
       background = new sprite({
         position: {
           x: 0,
@@ -94,6 +98,8 @@ let levels = {
       collisionBlocks = parsedCollistions.createObjectsFrom2D();
       player.position.x = 95;
       player.position.y = 140;
+      if (player.currentAnimation)
+        player.currentAnimation.isActive = false;
       player.collisionBlocks = collisionBlocks;
       background = new sprite({
         position: {
@@ -123,6 +129,8 @@ let levels = {
       collisionBlocks = parsedCollistions.createObjectsFrom2D();
       player.position.x = 760;
       player.position.y = 161;
+      if (player.currentAnimation)
+        player.currentAnimation.isActive = false;
       player.collisionBlocks = collisionBlocks;
       background = new sprite({
         position: {
