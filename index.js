@@ -15,7 +15,9 @@ const backgroundLevel1 = new sprite({
 });
 
 const player = new Player({
-  collisionBlocks
+  collisionBlocks,
+  imageSrc: './img/king/idle.png',
+  frameRate: 11,
 });
 
 

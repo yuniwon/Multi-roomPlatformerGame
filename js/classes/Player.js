@@ -1,7 +1,10 @@
-class Player {
+class Player extends sprite{
   constructor({
-    collisionBlocks = [],
+    collisionBlocks = [], 
+    imageSrc,
+    frameRate
   }) {
+    super({imageSrc, frameRate});
     this.position = {
       x: 200,
       y: 200,
@@ -10,8 +13,7 @@ class Player {
       x: 0,
       y: 0,
     }
-    this.width = 25;
-    this.height = 25;
+
     this.sides = {
       bottom: this.position.y + this.height,
       // left: this.x,
@@ -21,12 +23,11 @@ class Player {
     this.collisionBlocks = collisionBlocks;
   }
 
-  draw() {
-    c.fillStyle = 'red';
-    c.fillRect(this.position.x, this.position.y, this.width, this.height);
-  }
 
-  update() {
+  update() { // 플레이어의 위치를 업데이트
+    // 블루박스
+    // c.fillStyle = 'rgba(0, 0, 255, 0.5)';
+    // c.fillRect(this.position.x, this.position.y, this.width, this.height);
     this.position.x += this.velocity.x;
 
     this.checkForHorizontalCollisions();
@@ -34,7 +35,7 @@ class Player {
     this.checkForVerticalCollisions();
   }
 
-  checkForHorizontalCollisions() {
+  checkForHorizontalCollisions() { // 충돌 블록과 플레이어의 충돌을 검사
     for (let i = 0; i < this.collisionBlocks.length; i++) {
       const block = this.collisionBlocks[i];
       if (this.position.x <= block.position.x + block.width && // 플레이어의 오른쪽이 충돌 블록의 왼쪽보다 오른쪽에 있고
@@ -55,12 +56,12 @@ class Player {
       }
     }
   };
-  applyGravity() {
+  applyGravity() { // 중력을 적용
     this.velocity.y += this.gravity;
     this.position.y += this.velocity.y;
   }
 
-  checkForVerticalCollisions() {
+  checkForVerticalCollisions() { // 충돌 블록과 플레이어의 충돌을 검사
     for (let i = 0; i < this.collisionBlocks.length; i++) {
       const block = this.collisionBlocks[i];
       if (
