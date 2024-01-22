@@ -11,7 +11,7 @@ Array.prototype.createObjectsFrom2D = function (object) { // 2차원 배열을 �
   const objects = [];
   this.forEach((row, y) => {
     row.forEach((col, x) => {
-      if (col === 292) {
+      if (col === 292 || col === 250) {
         // push to collisions array
         objects.push(new CollisionBlock({
           position: {

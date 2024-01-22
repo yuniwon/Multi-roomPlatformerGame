@@ -52,6 +52,7 @@ class Player extends sprite {
     this.frameRate = this.animations[name].frameRate;
     this.frameBuffer = this.animations[name].frameBuffer;
     this.loop = this.animations[name].loop;
+    this.currentAnimation = this.animations[name];
   }
   updateHitbox() { // 충돌 블록과 플레이어의 충돌을 검사하기 위한 hitbox를 업데이트
     this.hitbox = {
