@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <script defer src="js/classes/Player.js"></script>
+  <script defer src="index.js"></script>
   <style>
-    html, body {
+    html,
+    body {
       background-color: black;
     }
   </style>
 </head>
+
 <body>
-  
+
   <canvas id="screen"></canvas>
 </body>
+
 </html>
-<script>
-  const canvas = document.getElementById('screen');
-const c = canvas.getContext('2d');
-canvas.width = 64 * 16; // 1024
-canvas.height = 64 * 9; // 576
-c.fillStyle = 'white';
-c.fillRect(0, 0, canvas.width, canvas.height);
-</script>
