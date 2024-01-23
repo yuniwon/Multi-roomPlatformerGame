@@ -16,31 +16,31 @@ const player = new Player({
     idleRight: {
       imageSrc: './img/king/idle.png',
       frameRate: 11,
-      frameBuffer: 2,
+      frameBuffer: 4,
       loop: true,
     },
     idleLeft: {
       imageSrc: './img/king/idleLeft.png',
       frameRate: 11,
-      frameBuffer: 2,
+      frameBuffer: 4,
       loop: true,
     },
     runRight: {
       imageSrc: './img/king/runRight.png',
       frameRate: 8,
-      frameBuffer: 4,
+      frameBuffer: 8,
       loop: true,
     },
     runLeft: {
       imageSrc: './img/king/runLeft.png',
       frameRate: 8,
-      frameBuffer: 4,
+      frameBuffer: 8,
       loop: true,
     },
     enterDoor: {
       imageSrc: './img/king/enterDoor.png',
       frameRate: 8,
-      frameBuffer: 4,
+      frameBuffer: 8,
       loop: false,
       onComplete: () => {
         gsap.to(overlay, {
