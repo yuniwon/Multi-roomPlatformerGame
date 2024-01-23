@@ -26,7 +26,7 @@ class Player extends sprite {
       // left: this.x,
       // right: this.x + this.width,
     }
-    this.gravity = 0.3;
+    this.gravity = 1;
     this.collisionBlocks = collisionBlocks;
   }
 
@@ -70,11 +70,11 @@ class Player extends sprite {
     this.velocity.x = 0;
     if (keys.d.pressed) { //오른쪽 키를 누르면 플레이어가 오른쪽으로 이동
       this.switchSprite('runRight');
-      this.velocity.x = 2;
+      this.velocity.x = 5;
       this.lastDirection = 'right';
     } else if (keys.a.pressed) { //왼쪽 키를 누르면 플레이어가 왼쪽으로 이동
       this.switchSprite('runLeft');
-      this.velocity.x = -2;
+      this.velocity.x = -5;
       this.lastDirection = 'left';
     } else {
       if (this.lastDirection === 'left') this.switchSprite('idleLeft');

@@ -4,7 +4,7 @@ class sprite {
     imageSrc,
     frameRate = 1,
     animations,
-    frameBuffer = 4,
+    frameBuffer = 2,
     loop = true,
     autoplay = true,
   }) {
@@ -70,7 +70,7 @@ class sprite {
       if (this.currentFrame < this.frameRate - 1) this.currentFrame++;
       else if (this.loop) this.currentFrame = 0;
     }
-    if (this.currentAnimation?.onComplete) {
+    if (this.currentAnimation ?.onComplete) {
       if (this.currentFrame === this.frameRate - 1 && !this.currentAnimation.isActive) {
         this.currentAnimation.onComplete();
         this.currentAnimation.isActive = true;
