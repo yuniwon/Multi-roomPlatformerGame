@@ -61,6 +61,8 @@ const player = new Player({
 
   }
 });
+
+// 맵 전환 -----------------------------------------------------
 let level = 1;
 let levels = {
   1: {
@@ -156,7 +158,7 @@ let levels = {
   }
 }
 
-
+// 맵 전환 끝 -----------------------------------------------------
 
 const keys = {
   w: {
@@ -171,10 +173,11 @@ const keys = {
 
 }
 
+// 화면전환용 오버레이
 const overlay = {
   opacity: 0,
 };
-
+// 화면 애니메이션 시작 -----------------------------------------------------
 function animate() {
   window.requestAnimationFrame(animate);
   // 배경 그리기
@@ -196,6 +199,6 @@ function animate() {
   c.fillRect(0, 0, canvas.width, canvas.height);
   c.restore();
 }
-
 levels[level].init();
 animate();
+// 화면 애니메이션 끝 -----------------------------------------------------
